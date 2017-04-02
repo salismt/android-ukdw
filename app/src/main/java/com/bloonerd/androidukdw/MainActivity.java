@@ -1,5 +1,6 @@
 package com.bloonerd.androidukdw;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bloonerd.androidukdw.mvc.MVCActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements ListOnClick {
     public void onClick(Category category) {
         switch (category.categoryType) {
             case CategoryType.MVC:
-                Toast.makeText(this, category.name, Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, MVCActivity.class));
                 break;
             case CategoryType.MVP:
                 Toast.makeText(this, category.name, Toast.LENGTH_SHORT).show();
