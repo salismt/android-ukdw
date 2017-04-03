@@ -4,6 +4,9 @@ import com.bloonerd.androidukdw.UserPreference;
 import com.bloonerd.androidukdw.Util;
 import com.bloonerd.androidukdw.model.User;
 
+import java.text.DateFormatSymbols;
+import java.util.Locale;
+
 public class MVPPresenter {
 
     private UserPreference userPreference;
@@ -44,5 +47,17 @@ public class MVPPresenter {
             view.onSaveSuccess("Saved");
         }
 
+    }
+
+    public void setDateOfBirth(int day, int month, int year) {
+        view.getDateOfBirth(String.format(Locale.ENGLISH, "%d %s %d", day, getMonth(month), year));
+    }
+
+    public String getMonth(int month) {
+        return new DateFormatSymbols().getMonths()[month - 1];
+    }
+
+    public void onImageClick() {
+        view.showGallery();
     }
 }

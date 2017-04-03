@@ -100,8 +100,7 @@ public class MVPActivity extends AppCompatActivity implements MVPView {
         imageProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(i, RESULT_LOAD_IMAGE);
+                presenter.onImageClick();
             }
         });
     }
@@ -119,7 +118,7 @@ public class MVPActivity extends AppCompatActivity implements MVPView {
             // arg3 = day
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                dateOfBirth.setText(String.format(Locale.ENGLISH, "%d %s %d", day, getMonth(month), year));
+                presenter.setDateOfBirth(day, month, year);
             }
         }, year, month, day);
         dialog.getDatePicker().setMaxDate(new Date().getTime());
@@ -129,10 +128,6 @@ public class MVPActivity extends AppCompatActivity implements MVPView {
                 dialog.show();
             }
         });
-    }
-
-    public String getMonth(int month) {
-        return new DateFormatSymbols().getMonths()[month - 1];
     }
 
     private void setSaveButton() {
@@ -161,5 +156,16 @@ public class MVPActivity extends AppCompatActivity implements MVPView {
     @Override
     public void onSaveSuccess(String success) {
         Toast.makeText(this, success, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void getDateOfBirth(String dob) {
+        dateOfBirth.setText(dob);
+    }
+
+    @Override
+    public void showGallery() {
+        Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(i, RESULT_LOAD_IMAGE);
     }
 }
