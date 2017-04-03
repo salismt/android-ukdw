@@ -3,6 +3,7 @@ package com.bloonerd.androidukdw.mvc;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -22,6 +23,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bloonerd.androidukdw.R;
+import com.bloonerd.androidukdw.UserPreference;
+import com.bloonerd.androidukdw.model.User;
+import com.google.gson.Gson;
 
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
@@ -44,11 +48,14 @@ public class MVCActivity extends AppCompatActivity {
     private Button saveBtn;
     private Bitmap imgFromGallery;
     private Calendar calendar;
+    private UserPreference userPreference;
+    private String picturePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mvc);
+        userPreference = UserPreference.getInstance(this);
         initView();
         setImage();
         setDateOfBirth();
@@ -88,7 +95,7 @@ public class MVCActivity extends AppCompatActivity {
             Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
             cursor.moveToFirst();
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            String picturePath = cursor.getString(columnIndex);
+            picturePath = cursor.getString(columnIndex);
             cursor.close();
             imgFromGallery = BitmapFactory.decodeFile(picturePath);
             if (imgFromGallery != null)
@@ -170,7 +177,9 @@ public class MVCActivity extends AppCompatActivity {
                 } else if (!passStr.equals(confPassStr)) {
                     Toast.makeText(context, "Password doesn\'t match", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(context, "show dob " + dob, Toast.LENGTH_SHORT).show();
+                    User user = new User(fName, lName, emailStr, dob, genderStr, picturePath, passStr);
+                    userPreference.saveUser(user);
+                    Toast.makeText(context, "SAVED" + dob, Toast.LENGTH_SHORT).show();
                 }
 
             }
