@@ -1,9 +1,8 @@
-package com.bloonerd.androidukdw.mvc;
+package com.bloonerd.androidukdw.common;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,7 +11,6 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -25,7 +23,6 @@ import android.widget.Toast;
 import com.bloonerd.androidukdw.R;
 import com.bloonerd.androidukdw.UserPreference;
 import com.bloonerd.androidukdw.model.User;
-import com.google.gson.Gson;
 
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
@@ -33,7 +30,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
-public class MVCActivity extends AppCompatActivity {
+public class CommonActivity extends AppCompatActivity {
 
     private static final String EMAIL_REGEX = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
     private static final int RESULT_LOAD_IMAGE = 35;

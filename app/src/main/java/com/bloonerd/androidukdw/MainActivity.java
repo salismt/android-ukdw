@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bloonerd.androidukdw.ddd.view.DomainActivity;
-import com.bloonerd.androidukdw.mvc.MVCActivity;
+import com.bloonerd.androidukdw.common.CommonActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements ListOnClick {
     public void onClick(Category category) {
         switch (category.categoryType) {
             case CategoryType.MVC: {
-                startActivity(new Intent(this, MVCActivity.class));
+                startActivity(new Intent(this, CommonActivity.class));
                 break;
             }
             case CategoryType.MVP: {

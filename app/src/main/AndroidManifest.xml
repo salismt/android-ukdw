@@ -15,9 +15,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".mvc.MVCActivity" />
+        <activity android:name=".common.CommonActivity" />
         <activity android:name=".ddd.view.DomainActivity" />
-        <activity android:name=".mvp.MVPActivity"></activity>
+        <activity android:name=".mvp.MVPActivity" />
+        <activity android:name=".common.CommonDisplayActivity"></activity>
     </application>
 
 </manifest>

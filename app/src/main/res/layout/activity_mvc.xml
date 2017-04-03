@@ -5,7 +5,7 @@
     android:id="@+id/activity_mvc"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.bloonerd.androidukdw.mvc.MVCActivity">
+    tools:context="com.bloonerd.androidukdw.common.CommonActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
