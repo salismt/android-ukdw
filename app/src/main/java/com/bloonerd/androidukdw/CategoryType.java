@@ -9,12 +9,12 @@ import java.lang.annotation.RetentionPolicy;
 @IntDef({
         CategoryType.MVC,
         CategoryType.MVP,
-        CategoryType.MVVM
+        CategoryType.MVVM,
+        CategoryType.DDD
 })
-
 public @interface CategoryType {
     int MVC = 0;
     int MVP = 1;
     int MVVM = 2;
+    int DDD = 3;
 }
-
