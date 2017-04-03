@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Android UKDW</string>
+    <string-array name="genders">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
 </resources>

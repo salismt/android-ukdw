@@ -11,11 +11,15 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bloonerd.androidukdw.R;
 
@@ -23,16 +27,18 @@ import java.text.DateFormatSymbols;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 public class MVCActivity extends AppCompatActivity {
 
+    private static final String EMAIL_REGEX = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
     private static final int RESULT_LOAD_IMAGE = 35;
     private ImageButton imageProfile;
     private EditText firstName;
     private EditText lastName;
     private EditText email;
     private TextView dateOfBirth;
-    private TextView gender;
+    private Spinner gender;
     private EditText password;
     private EditText confirmPassword;
     private Button saveBtn;
@@ -46,6 +52,8 @@ public class MVCActivity extends AppCompatActivity {
         initView();
         setImage();
         setDateOfBirth();
+        setGender();
+        setSaveButton();
     }
 
     private void initView() {
@@ -54,7 +62,7 @@ public class MVCActivity extends AppCompatActivity {
         lastName = (EditText) findViewById(R.id.input_last_name);
         email = (EditText) findViewById(R.id.input_email);
         dateOfBirth = (TextView) findViewById(R.id.text_date);
-        gender = (TextView) findViewById(R.id.text_gender);
+        gender = (Spinner) findViewById(R.id.spinner_gender);
         password = (EditText) findViewById(R.id.input_password);
         confirmPassword = (EditText) findViewById(R.id.input_confirm_password);
         saveBtn = (Button) findViewById(R.id.btn_save);
@@ -113,8 +121,60 @@ public class MVCActivity extends AppCompatActivity {
         });
     }
 
+    private void setGender() {
+        gender.setAdapter(ArrayAdapter.createFromResource(
+                this, R.array.genders, android.R.layout.simple_spinner_item));
+
+    }
+
     public String getMonth(int month) {
         return new DateFormatSymbols().getMonths()[month-1];
+    }
+
+    private void setSaveButton() {
+        final Context context = this;
+
+        final Pattern emailPattern = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
+
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String fName = firstName.getText().toString();
+                String lName = lastName.getText().toString();
+                String emailStr = email.getText().toString();
+                String dob = dateOfBirth.getText().toString();
+                String genderStr = gender.getSelectedItem().toString();
+                String passStr = password.getText().toString();
+                String confPassStr = confirmPassword.getText().toString();
+
+                if (fName.length() == 0) {
+                    Toast.makeText(context, "First name cannot be empty", Toast.LENGTH_SHORT).show();
+                } else if (lName.length() == 0) {
+                    Toast.makeText(context, "Last name cannot be empty", Toast.LENGTH_SHORT).show();
+                } else if (emailStr.length() == 0) {
+                    Toast.makeText(context, "Email cannot be empty", Toast.LENGTH_SHORT).show();
+                } else if (!emailPattern.matcher(emailStr).find()) {
+                    Toast.makeText(context, "Please input valid email", Toast.LENGTH_SHORT).show();
+                } else if (dob.length() == 0) {
+                    Toast.makeText(context, "Date cannot be empty", Toast.LENGTH_SHORT).show();
+                } else if (genderStr.length() == 0) {
+                    Toast.makeText(context, "Date cannot be empty", Toast.LENGTH_SHORT).show();
+                } else if (passStr.length() == 0) {
+                    Toast.makeText(context, "Password cannot be empty", Toast.LENGTH_SHORT).show();
+                } else if (confPassStr.length() == 0) {
+                    Toast.makeText(context, "Confirm Password cannot be empty", Toast.LENGTH_SHORT).show();
+                } else if (passStr.length() < 8) {
+                    Toast.makeText(context, "Password cannot be less than 8", Toast.LENGTH_SHORT).show();
+                } else if (confPassStr.length() < 8) {
+                    Toast.makeText(context, "Confirm Password cannot be less than 8", Toast.LENGTH_SHORT).show();
+                } else if (!passStr.equals(confPassStr)) {
+                    Toast.makeText(context, "Password doesn\'t match", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(context, "show dob " + dob, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
     }
 
 }

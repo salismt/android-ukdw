@@ -84,7 +84,7 @@
                 android:id="@+id/text_date"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Date of Birth"
+                android:hint="Date of Birth"
                 android:gravity="center_vertical"
                 android:background="?attr/selectableItemBackground"
                 android:textSize="20sp"
@@ -103,14 +103,15 @@
                 android:src="@drawable/ic_gender"
                 android:adjustViewBounds="true"/>
 
-            <TextView
-                android:id="@+id/text_gender"
+            <Spinner
+                android:id="@+id/spinner_gender"
+                style="@style/Widget.AppCompat.Spinner.DropDown"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@android:color/transparent"
                 android:text="Gender"
                 android:gravity="center_vertical"
                 android:textSize="20sp"
-                android:background="?attr/selectableItemBackground"
                 android:layout_marginLeft="16dp"/>
 
         </LinearLayout>
