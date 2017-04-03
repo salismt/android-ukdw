@@ -1,13 +1,18 @@
 package com.bloonerd.androidukdw.common;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -34,6 +39,7 @@ public class CommonActivity extends AppCompatActivity {
 
     private static final String EMAIL_REGEX = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
     private static final int RESULT_LOAD_IMAGE = 35;
+    private static final int REQ_IMG_PERMISSION = 14;
     private ImageButton imageProfile;
     private EditText firstName;
     private EditText lastName;
@@ -51,7 +57,7 @@ public class CommonActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mvc);
+        setContentView(R.layout.activity_common);
         userPreference = UserPreference.getInstance(this);
         initView();
         setImage();
@@ -87,16 +93,20 @@ public class CommonActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         // get the image and set the image
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
-            Uri selectedImage = data.getData();
-            String[] filePathColumn = {MediaStore.Images.Media.DATA};
-            Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
-            cursor.moveToFirst();
-            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            picturePath = cursor.getString(columnIndex);
-            cursor.close();
-            imgFromGallery = BitmapFactory.decodeFile(picturePath);
-            if (imgFromGallery != null)
-                imageProfile.setImageBitmap(imgFromGallery);
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQ_IMG_PERMISSION);
+            } else {
+                Uri selectedImage = data.getData();
+                String[] filePathColumn = {MediaStore.Images.Media.DATA};
+                Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+                cursor.moveToFirst();
+                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                picturePath = cursor.getString(columnIndex);
+                cursor.close();
+                imgFromGallery = BitmapFactory.decodeFile(picturePath);
+                if (imgFromGallery != null)
+                    imageProfile.setImageBitmap(imgFromGallery);
+            }
         }
     }
 
@@ -177,6 +187,7 @@ public class CommonActivity extends AppCompatActivity {
                     User user = new User(fName, lName, emailStr, dob, genderStr, picturePath, passStr);
                     userPreference.saveUser(user);
                     Toast.makeText(context, "SAVED" + dob, Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(context, CommonDisplayActivity.class));
                 }
 
             }
