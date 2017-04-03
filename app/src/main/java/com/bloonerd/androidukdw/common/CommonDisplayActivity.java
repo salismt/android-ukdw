@@ -1,23 +1,19 @@
 package com.bloonerd.androidukdw.common;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bloonerd.androidukdw.R;
 import com.bloonerd.androidukdw.UserPreference;
 import com.bloonerd.androidukdw.model.User;
-
-import org.joda.time.Days;
-import org.joda.time.Years;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
