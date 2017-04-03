@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.bloonerd.androidukdw">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:icon="@mipmap/ic_launcher"
@@ -21,7 +21,8 @@
         <activity android:name=".common.CommonActivity" />
         <activity android:name=".ddd.view.DomainActivity" />
         <activity android:name=".mvp.MVPActivity" />
-        <activity android:name=".common.CommonDisplayActivity"></activity>
+        <activity android:name=".common.CommonDisplayActivity" />
+        <activity android:name=".mvvm.MVVMDisplayActivity"></activity>
     </application>
 
 </manifest>
