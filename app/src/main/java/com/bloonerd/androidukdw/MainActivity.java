@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements ListOnClick {
         setContentView(R.layout.activity_main);
 
         List<Category> categories = new ArrayList<>();
-        Category mvc = new Category("MVC", CategoryType.MVC);
+        Category mvc = new Category("Common", CategoryType.MVC);
         Category mvp = new Category("MVP", CategoryType.MVP);
         Category mvvm = new Category("MVVM", CategoryType.MVVM);
         Category ddd = new Category("DDD", CategoryType.DDD);

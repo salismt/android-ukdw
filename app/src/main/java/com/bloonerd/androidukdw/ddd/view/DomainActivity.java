@@ -1,14 +1,15 @@
 package com.bloonerd.androidukdw.ddd.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.bloonerd.androidukdw.R;
 import com.bloonerd.androidukdw.ddd.domain.contract.UserService;
-import com.bloonerd.androidukdw.ddd.domain.model.User;
 import com.bloonerd.androidukdw.ddd.services.UserServices;
 
 public class DomainActivity extends AppCompatActivity {
@@ -19,22 +20,28 @@ public class DomainActivity extends AppCompatActivity {
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_domain);
-        userService = new UserServices();
 
-        final String username = "Budi Oktaviyan Suryanto";
-        final String password = "12345678";
-        final Bundle bundle = userService.create(username, password);
+        final EditText usernameEditText = (EditText) findViewById(R.id.et_username);
+        final EditText passwordEditText = (EditText) findViewById(R.id.et_password);
 
-        final User user = userService.load(bundle);
-        final String loadUsername = user.getUsername();
-        final String loadPassword = user.getPassword();
+        final Button button = (Button) findViewById(R.id.btn_submit);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+                final String username = usernameEditText.getText().toString();
+                final String password = passwordEditText.getText().toString();
 
-        final String message = String.format("Username: %s, Password: %s", loadUsername, loadPassword);
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+                // Inisialisasi user services
+                userService = new UserServices();
 
-        final TextView viewUsername = (TextView) findViewById(R.id.tv_username);
-        final TextView viewPassword = (TextView) findViewById(R.id.tv_password);
-        viewUsername.setText(loadUsername);
-        viewPassword.setText(loadPassword);
+                // Masukkan variable username dan password ke dalam android bundle object
+                final Bundle bundle = userService.create(username, password);
+
+                // Panggil intent untuk ke activity berikutnya dengan membawa bundle object
+                final Intent intent = new Intent(DomainActivity.this, DomainResultActivity.class);
+                intent.putExtra("USER_BUNDLE", bundle);
+                startActivity(intent);
+            }
+        });
     }
 }
