@@ -12,9 +12,9 @@ public class UserServices implements UserService {
     UserRepository userRepository;
 
     @Override
-    public Bundle create(final String username, final String password) {
+    public Bundle create(final String username, final String password, final String email) {
         userRepository = new UserRepositories();
-        return userRepository.setUser(username, password);
+        return userRepository.setUser(username, password, email);
     }
 
     @Override

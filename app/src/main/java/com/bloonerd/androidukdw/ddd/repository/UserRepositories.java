@@ -8,10 +8,11 @@ import com.bloonerd.androidukdw.ddd.domain.model.User;
 public class UserRepositories implements UserRepository {
 
     @Override
-    public Bundle setUser(final String username, final String password) {
+    public Bundle setUser(final String username, final String password, final String email) {
         final User user = new User();
         user.setUsername(username);
         user.setPassword(password);
+        user.setEmail(email);
 
         final Bundle bundle = new Bundle();
         bundle.putParcelable("USER", user);

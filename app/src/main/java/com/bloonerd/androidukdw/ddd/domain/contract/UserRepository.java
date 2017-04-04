@@ -6,7 +6,7 @@ import com.bloonerd.androidukdw.ddd.domain.model.User;
 
 public interface UserRepository {
 
-    Bundle setUser(String username, String password);
+    Bundle setUser(String username, String password, String email);
 
     User getUser(Bundle bundle);
 }

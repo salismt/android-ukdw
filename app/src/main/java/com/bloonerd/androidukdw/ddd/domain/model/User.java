@@ -7,6 +7,7 @@ public class User implements Parcelable {
 
     private String username;
     private String password;
+    private String email;
 
     public static final Creator<User> CREATOR = new Creator<User>() {
         @Override
@@ -26,6 +27,7 @@ public class User implements Parcelable {
     protected User(Parcel in) {
         username = in.readString();
         password = in.readString();
+        email = in.readString();
     }
 
     @Override
@@ -37,6 +39,7 @@ public class User implements Parcelable {
     public void writeToParcel(final Parcel dest, final int flags) {
         dest.writeString(username);
         dest.writeString(password);
+        dest.writeString(email);
     }
 
     public String getUsername() {
@@ -53,5 +56,13 @@ public class User implements Parcelable {
 
     public void setPassword(final String password) {
         this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(final String email) {
+        this.email = email;
     }
 }
