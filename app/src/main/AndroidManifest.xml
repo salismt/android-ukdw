@@ -20,6 +20,7 @@
         </activity>
         <activity android:name=".common.CommonActivity" />
         <activity android:name=".ddd.view.DomainActivity" />
+        <activity android:name=".ddd.view.DomainResultActivity" />
         <activity android:name=".mvp.MVPActivity" />
         <activity android:name=".common.CommonDisplayActivity" />
         <activity android:name=".mvvm.MVVMDisplayActivity"></activity>
