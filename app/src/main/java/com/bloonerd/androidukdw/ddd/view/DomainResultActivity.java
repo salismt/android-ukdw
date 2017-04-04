@@ -24,10 +24,13 @@ public class DomainResultActivity extends AppCompatActivity {
         final User user = userService.load(getIntent().getBundleExtra("USER_BUNDLE"));
         final String loadUsername = user.getUsername();
         final String loadPassword = user.getPassword();
+        final String loadEmail = user.getEmail();
 
         final TextView viewUsername = (TextView) findViewById(R.id.tv_username);
         final TextView viewPassword = (TextView) findViewById(R.id.tv_password);
+        final TextView viewEmail = (TextView) findViewById(R.id.tv_email);
         viewUsername.setText(loadUsername);
         viewPassword.setText(loadPassword);
+        viewEmail.setText(loadEmail);
     }
 }

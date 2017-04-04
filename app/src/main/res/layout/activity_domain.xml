@@ -33,6 +33,21 @@
         android:textColor="@android:color/black"
         android:textSize="14sp" />
 
+    <EditText
+        android:id="@+id/et_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/et_password"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:hint="@string/hint_email"
+        android:inputType="textEmailAddress"
+        android:textColor="@android:color/black"
+        android:textSize="14sp" />
+
     <Button
         android:id="@+id/btn_submit"
         android:layout_width="match_parent"

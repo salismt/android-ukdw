@@ -23,6 +23,7 @@ public class DomainActivity extends AppCompatActivity {
 
         final EditText usernameEditText = (EditText) findViewById(R.id.et_username);
         final EditText passwordEditText = (EditText) findViewById(R.id.et_password);
+        final EditText emailEditText = (EditText) findViewById(R.id.et_email);
 
         final Button button = (Button) findViewById(R.id.btn_submit);
         button.setOnClickListener(new View.OnClickListener() {
@@ -30,12 +31,13 @@ public class DomainActivity extends AppCompatActivity {
             public void onClick(final View view) {
                 final String username = usernameEditText.getText().toString();
                 final String password = passwordEditText.getText().toString();
+                final String email = emailEditText.getText().toString();
 
                 // Inisialisasi user services
                 userService = new UserServices();
 
                 // Masukkan variable username dan password ke dalam android bundle object
-                final Bundle bundle = userService.create(username, password);
+                final Bundle bundle = userService.create(username, password, email);
 
                 // Panggil intent untuk ke activity berikutnya dengan membawa bundle object
                 final Intent intent = new Intent(DomainActivity.this, DomainResultActivity.class);

@@ -6,5 +6,6 @@
     </string-array>
     <string name="hint_username">Input username</string>
     <string name="hint_password">Input password</string>
+    <string name="hint_email">Input email address</string>
     <string name="button_submit">Submit</string>
 </resources>

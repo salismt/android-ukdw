@@ -6,7 +6,7 @@ import com.bloonerd.androidukdw.ddd.domain.model.User;
 
 public interface UserService {
 
-    Bundle create(String username, String password);
+    Bundle create(String username, String password, String email);
 
     User load(Bundle bundle);
 }
